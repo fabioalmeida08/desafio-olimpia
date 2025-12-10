@@ -2,7 +2,7 @@ from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from tools.finance_tools import get_tools
-from utils.utils import clear_term
+from utils.utils import clear_term, rich_print
 
 
 class FinanceAgent:
@@ -46,9 +46,9 @@ class FinanceAgent:
 
     def generate_report(self):
         clear_term()
-        print("Gerando relatório... Por favor aguarde.\n")
+        print("Gerando relatório... Por favor aguarde.")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
         clear_term()
-        print(resposta["messages"][-1].content)
+        rich_print(resposta["messages"][-1].content)
