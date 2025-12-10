@@ -39,7 +39,7 @@ class FinanceAgent:
            - Principais Produtos/Serviços
            - 3 Notícias Recentes (com links)
            - Preço Atual da Ação
-           Use formatação em texto simples que será exibido em um terminal como bash, com linhas separadoras e emojis.
+           Use formatação em texto em Markdown, com linhas separadoras e emojis.
 
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
         """
