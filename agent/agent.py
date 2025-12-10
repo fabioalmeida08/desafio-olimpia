@@ -39,7 +39,9 @@ class FinanceAgent:
            - Principais Produtos/Serviços
            - 3 Notícias Recentes (com links)
            - Preço Atual da Ação
-           Use formatação em texto em Markdown, com linhas separadoras e emojis.
+           Use formatação em texto em Markdown,botando as noticias em link externo no formato
+           [Titulo da noticia](link da noticia)
+           usando emotes e linhas para formatação
 
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
         """
