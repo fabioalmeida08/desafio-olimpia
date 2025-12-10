@@ -3,6 +3,16 @@ import platform
 
 from dotenv import load_dotenv
 
+from rich.console import Console
+from rich.markdown import Markdown
+
+def rich_print(report: str):
+    console = Console()
+
+    md = Markdown(f"""{report}""")
+    console.print(md)
+
+from dotenv import load_dotenv
 
 def load_api_key():
     load_dotenv()
