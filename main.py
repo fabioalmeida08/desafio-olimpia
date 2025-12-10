@@ -9,7 +9,7 @@ if __name__ == "__main__":
     empresa = input("Digite o nome da empresa: ")
 
     if not empresa:
-        raise Exception("Digite um nome valido para empresa")
+        raise SystemExit("Digite um nome valido para empresa")
 
     agent = FinanceAgent(api_key, empresa)
     agent.generate_report()
