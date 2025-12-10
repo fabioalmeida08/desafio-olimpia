@@ -32,17 +32,17 @@ class FinanceAgent:
            - Obter até 3 notícias recentes, não repetidas, com título e link.
            - Obter o preço da ação.
 
-        3. Formate o output como um relatório profissional, bem espaçado, com seções claras usando emojis e linhas no formato Markdown.
+        3. Formate o output como um relatório profissional, bem espaçado, com seções claras usando emojis e linhas no formato Markdown, aonde os emojis fiquem no lado esquerdo e logo em seguida o titulo das seções de forma alinhada a esquerda.
         O relatório deve incluir:
            - Razão Social da Empresa
            - Setor de Atuação
            - Breve Histórico
            - Principais Produtos/Serviços
-           - 3 Notícias Recentes (com links)
+           - 3 Notícias Recentes (com links entre aspas)
            - Preço Atual da Ação
 
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
-        NÃO SE ESQUEÇA DE ADICIONAR OS LINKS DAS NOTÍCIAS.
+        NÃO SE ESQUEÇA DE ADICIONAR OS LINKS DAS NOTÍCIAS E SE CERTIFIQUE QUE OS EMOTES ESTÃO FORMATADOS COM UNICODE.
         """
 
     def generate_report(self):
