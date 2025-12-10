@@ -1,10 +1,8 @@
-import os
-import platform
-
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from tools.finance_tools import get_tools
+from utils.utils import clear_term
 
 
 class FinanceAgent:
@@ -46,17 +44,11 @@ class FinanceAgent:
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
         """
 
-    def clear_term(self):
-        if platform.system() == "Windows":
-            os.system("cls")
-        else:
-            os.system("clear")
-
     def generate_report(self):
-        self.clear_term()
+        clear_term()
         print("\nGerando relatório... Aguarde uns segundos\n")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
-        self.clear_term()
+        clear_term()
         print(resposta["messages"][-1].content)
