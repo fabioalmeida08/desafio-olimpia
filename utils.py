@@ -15,7 +15,10 @@ def load_api_key():
         print("   3. Copie a chave")
         print("\n💡 Depois, crie um arquivo .env com:")
         print("   API_KEY=sua_chave_aqui\n")
-        api_key = input("Cole sua API Key aqui (ou Enter para sair): ").strip()
+        api_key = input("Ou cole sua API Key aqui (ou Enter para sair): ").strip()
         if not api_key:
-            exit()
+            raise SystemExit("Saindo... API Key não fornecida.")
+        else:
+            return api_key
+    return api_key
 
