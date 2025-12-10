@@ -1,9 +1,25 @@
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.agents.structured_output import ToolStrategy
 
 from tools.finance_tools import get_tools
 from utils.utils import clear_term
+from dataclasses import dataclass
+from typing import Optional, List
 
+@dataclass
+class NewsItem:
+    title: str
+    link: str
+
+@dataclass
+class ResponseFormat:
+    """Esquema de resposta para o agente."""
+    company_name: str
+    company_summary: str
+    stock_price: Optional[float]
+    stock_price_currency: Optional[str] = "BRL"
+    news: Optional[List[NewsItem]] = None
 
 class FinanceAgent:
     def __init__(self, api_key: str, empresa: str):
@@ -16,6 +32,7 @@ class FinanceAgent:
         self.agent = create_agent(
             self.llm,
             self.tools,
+            response_format=ToolStrategy(ResponseFormat)
         )
         self.empresa = empresa
         self.prompt = f"""
@@ -51,4 +68,4 @@ class FinanceAgent:
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
         clear_term()
-        print(resposta["messages"][-1].content)
+        print(resposta["structured_response"])
