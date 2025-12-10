@@ -46,7 +46,7 @@ class FinanceAgent:
 
     def generate_report(self):
         clear_term()
-        print("\nGerando relatório... Aguarde uns segundos\n")
+        print("Gerando relatório... Por favor aguarde.\n")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
