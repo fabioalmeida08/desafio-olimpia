@@ -27,19 +27,11 @@ def buscar_ticker_duckduckgo(empresa: str) -> str:
     """
     duck = DuckDuckGoSearchRun()
 
-    query = f"ticker da empresa {empresa} B3"
+    query = f"ticker da empresa {empresa} B3 yahoo finances"
 
     try:
         resultado = duck.run(query)
         return resultado
-
-        # tickers = re.findall(r"\b[A-Z]{4}\d{1}\.SA\b", resultado)
-        #
-        # if tickers:
-        #     return tickers[0]
-        #
-        # return f"Nenhum ticker encontrado para '{empresa}' via DuckDuckGo."
-
     except Exception as e:
         return f"Erro ao buscar via DuckDuckGo: {str(e)}"
 
