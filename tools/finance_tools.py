@@ -7,6 +7,18 @@ from langchain_community.tools import DuckDuckGoSearchRun
 import re
 
 
+@tool("buscar_nome_empresa")
+def buscar_nome_empresa(empresa: str) -> str:
+    """
+    Retorna o nome oficial da empresa usando DuckDuckGo.
+    A extração do nome é feita pelo LLM.
+    """
+    duck = DuckDuckGoSearchRun()
+
+    query = f"empresa {empresa} nome oficial"
+    resultado = duck.run(query)
+    return resultado
+
 @tool("buscar_ticker_duckduckgo")
 def buscar_ticker_duckduckgo(empresa: str) -> str:
     """
@@ -103,6 +115,7 @@ def preco_acao_empresa(ticker: str) -> str:
 
 def get_tools():
     return [
+        buscar_nome_empresa,
         buscar_ticker_duckduckgo,
         buscar_ticker_empresa,
         resumo_empresa,
