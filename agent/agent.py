@@ -29,7 +29,7 @@ class FinanceAgent:
 
         2. Com a razão social inferida, use as tools para:
            - Obter o resumo da empresa (incluindo setor, histórico breve e produtos/serviços).
-           - Descobrir o ticker automaticamente.
+           - Descobrir o ticker usando 'buscar_ticker_duckduckgo' ou 'buscar_ticker_empresa' verifique se exista .SA no ticker.
            - Obter até 3 notícias recentes, não repetidas, com título e link.
            - Obter o preço da ação.
 
@@ -39,11 +39,11 @@ class FinanceAgent:
            - Setor de Atuação
            - Breve Histórico
            - Principais Produtos/Serviços
-           - 3 Notícias Recentes (com links entre aspas)
+           - 3 Notícias Recentes
            - Preço Atual da Ação
 
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
-        NÃO SE ESQUEÇA DE ADICIONAR OS LINKS DAS NOTÍCIAS E SE CERTIFIQUE QUE OS EMOTES ESTÃO FORMATADOS COM UNICODE.
+        NÃO SE ESQUEÇA DE ADICIONAR OS LINKS DAS NOTÍCIAS E SE CERTIFIQUE QUE OS EMOTES ESTÃO FORMATADOS COMO UNICODE.
         """
 
     def generate_report(self):
