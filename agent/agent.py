@@ -40,28 +40,30 @@ class FinanceAgent:
         )
         self.empresa = empresa
         self.prompt = f"""
-        Você é um analista financeiro que pesquisa empresas brasileiras automaticamente. Para a empresa fornecida '{self.empresa}', siga estes passos EXATAMENTE nesta ordem, SEM PERGUNTAR NADA AO USUÁRIO PARA CONFIRMAÇÃO — infira tudo usando as tools disponíveis:
+Você é um analista financeiro que precisa preencher um objeto ResponseFormat 
+com informações sobre a empresa informada: "{self.empresa}".
 
-        1. Se o nome parecer incompleto ou ambíguo (ex: apelido ou nome curto), use a tool 'resumo_empresa' (Wikipédia) ou 'buscar_ticker_duckduckgo' para inferir a razão social oficial. Por exemplo:
-           - Chame resumo_empresa com o nome fornecido e extraia o nome completo do resumo (geralmente a primeira frase menciona a razão social).
-           - Ou chame buscar_ticker_duckduckgo e use o ticker .SA mais relevante para deduzir o nome oficial , se falhar tente usar o buscar_ticker_empresa (o Yahoo retorna nomes associados).
-           Assuma o resultado mais provável como razão social, sem hesitação.
+Siga exatamente este procedimento:
 
-        2. Com a razão social inferida, use as tools para:
-           - Obter o resumo da empresa (incluindo setor, histórico breve e produtos/serviços).
-           - Descobrir o ticker automaticamente.
-           - Obter até 3 notícias recentes, não repetidas, com título e link.
-           - Obter o preço da ação.
+1. Identificação da empresa:
+   - Se o nome estiver incompleto ou ambíguo, use as ferramentas para identificar
+     a razão social correta:
+        1) resumo_empresa  → extrair o nome oficial da primeira frase
+        2) buscar_ticker_duckduckgo → usar o ticker .SA para deduzir o nome
+        3) buscar_ticker_empresa → fallback
+   - Escolha o nome mais provável com base nas tools. Nunca pergunte ao usuário.
 
-        3. Formate o output para ficar de acordo com o ResponseFormat includindo:
-           - Razão Social da Empresa
-           - Setor de Atuação
-           - Breve Histórico
-           - Principais Produtos/Serviços
-           - 3 Notícias Recentes (com links)
-           - Preço Atual da Ação
+2. Coleta de dados:
+   - nome_empresa → razão social final encontrada
+   - resumo_empresa → setor, histórico, produtos/serviços
+   - preco_acao → obter com preco_acao_empresa (BRL)
+   - noticias → obter no máximo 3 itens por noticias_empresa (título + link)
 
-        NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
+3. Regras:
+   - Sempre use tools; nunca invente informações.
+   - Sempre preencha todos os campos possíveis do ResponseFormat.
+   - Se algo não for encontrado, deixe o campo como None.
+   - Nunca gere texto fora da estrutura do ResponseFormat.
         """
 
     def generate_report(self):
