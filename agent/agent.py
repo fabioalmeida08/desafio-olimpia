@@ -2,7 +2,7 @@ from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents.structured_output import ToolStrategy
 
-from tools.finance_tools import get_tools
+from tools.agent_tools import get_tools
 from utils.utils import clear_term
 from dataclasses import asdict, dataclass
 from typing import Optional, List
