@@ -4,8 +4,9 @@ from langchain.agents.structured_output import ToolStrategy
 
 from tools.finance_tools import get_tools
 from utils.utils import clear_term
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Optional, List
+import json
 
 @dataclass
 class NewsItem:
@@ -15,11 +16,14 @@ class NewsItem:
 @dataclass
 class ResponseFormat:
     """Esquema de resposta para o agente."""
-    company_name: str
-    company_summary: str
-    stock_price: Optional[float]
-    stock_price_currency: Optional[str] = "BRL"
-    news: Optional[List[NewsItem]] = None
+    nome_empresa: str
+    resumo_empresa: str
+    preco_acao: Optional[float]
+    moeda: Optional[str] = "BRL"
+    noticias: Optional[List[NewsItem]] = None
+
+    def to_json(self):
+        return json.dumps(asdict(self), indent = 2 ,ensure_ascii=False)
 
 class FinanceAgent:
     def __init__(self, api_key: str, empresa: str):
@@ -49,23 +53,22 @@ class FinanceAgent:
            - Obter até 3 notícias recentes, não repetidas, com título e link.
            - Obter o preço da ação.
 
-        3. Formate o output como um relatório profissional, bem espaçado, com seções claras e emojis. O relatório deve incluir:
+        3. Formate o output para ficar de acordo com o ResponseFormat
            - Razão Social da Empresa
            - Setor de Atuação
            - Breve Histórico
            - Principais Produtos/Serviços
            - 3 Notícias Recentes (com links)
            - Preço Atual da Ação
-           Use formatação em texto simples que será exibido em um terminal como bash, com linhas separadoras e emojis.
 
         NÃO PERGUNTE POR CONFIRMAÇÃO — prossiga sempre com a melhor inferência baseada nas tools. Se não encontrar, reporte o erro sem interagir.
         """
 
     def generate_report(self):
         clear_term()
-        print("Gerando relatório... Por favor aguarde.\n")
+        print("Interagindo com llm... Por favor aguarde.")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
         clear_term()
-        print(resposta["structured_response"])
+        print(resposta["structured_response"].to_json())
