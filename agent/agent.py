@@ -26,7 +26,7 @@ SEM PERGUNTAR NADA AO USUÁRIO PARA CONFIRMAÇÃO — infira tudo usando as tool
 
 1. **Identificação da Razão Social**
    Se o nome parecer incompleto ou ambíguo (ex: apelido ou nome curto):
-   - Chame 'resumo_empresa' (Wikipédia) e extraia o nome completo do resumo 
+   - Chame 'buscar_nome_empresa' caso ainda os dados não estejam claros chame 'resumo_empresa' (Wikipédia) e extraia o nome completo do resumo 
      (geralmente a primeira frase menciona a razão social)
    - Ou chame 'buscar_ticker_empresa' e use o ticker .SA mais relevante 
      para deduzir o nome oficial (o Yahoo retorna nomes associados)
