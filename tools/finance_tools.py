@@ -103,15 +103,12 @@ def resumo_empresa(empresa: str) -> str:
     except Exception as e:
         return f"Erro ao buscar resumo: {str(e)}"
 
-
 @tool("noticias_empresa")
-def noticias_empresa(empresa: str) -> str:
-    """Busca até 10 notícias recentes sobre a empresa (Google News Brasil).
-
-    Use preferencialmente com a razão social oficial.
-    Retorna título + link já formatados para o relatório.
+def noticias_empresa(empresa: str) -> list[dict]:
     """
-
+    Busca até 10 notícias recentes usando Google News Brasil.
+    Retorna uma lista de dicts: [{ "titulo": "...", "link": "..." }]
+    """
     query = empresa.replace(" ", "+")
     url = f"https://news.google.com/rss/search?q={query}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
 
@@ -119,13 +116,15 @@ def noticias_empresa(empresa: str) -> str:
 
     noticias = []
     for item in feed.entries[:20]:
-        noticias.append(f"- {item.title}\n  {item.link}")
+        noticias.append({
+            "titulo": item.title,
+            "link": item.link,
+        })
 
     if not noticias:
-        return "Nenhuma notícia encontrada."
+        return []
 
-    return "\n".join(noticias)
-
+    return noticias
 
 @tool("preco_acao_empresa")
 def preco_acao_empresa(ticker: str) -> str:
