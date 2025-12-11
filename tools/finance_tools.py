@@ -3,7 +3,32 @@ import requests
 import wikipedia
 import yfinance as yf
 from langchain.tools import tool
+from langchain_community.tools import DuckDuckGoSearchRun 
+import re
 
+
+@tool("buscar_ticker_duckduckgo")
+def buscar_ticker_duckduckgo(empresa: str) -> str:
+    """
+    Usa DuckDuckGo Search para tentar identificar o ticker da empresa na B3.
+    Procura por tickers com final .SA (padrão do Yahoo Finance).
+    """
+    duck = DuckDuckGoSearchRun()
+
+    query = f"ticker da empresa {empresa} B3 .SA código ação"
+
+    try:
+        resultado = duck.run(query)
+
+        tickers = re.findall(r"\b[A-Z]{4}\d{1}\.SA\b", resultado)
+
+        if tickers:
+            return tickers[0]
+
+        return f"Nenhum ticker encontrado para '{empresa}' via DuckDuckGo."
+
+    except Exception as e:
+        return f"Erro ao buscar via DuckDuckGo: {str(e)}"
 
 @tool("buscar_ticker_empresa")
 def buscar_ticker_empresa(empresa: str) -> str:
