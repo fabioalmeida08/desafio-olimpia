@@ -1,7 +1,7 @@
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-from tools.finance_tools import get_tools
+from tools.agent_tools import get_tools
 from utils.utils import clear_term, rich_print
 
 
@@ -26,7 +26,7 @@ SEM PERGUNTAR NADA AO USUÁRIO PARA CONFIRMAÇÃO — infira tudo usando as tool
 
 1. **Identificação da Razão Social**
    Se o nome parecer incompleto ou ambíguo (ex: apelido ou nome curto):
-   - Chame 'resumo_empresa' (Wikipédia) e extraia o nome completo do resumo 
+   - Chame 'buscar_nome_empresa' caso ainda os dados não estejam claros chame 'resumo_empresa' (Wikipédia) e extraia o nome completo do resumo 
      (geralmente a primeira frase menciona a razão social)
    - Ou chame 'buscar_ticker_empresa' e use o ticker .SA mais relevante 
      para deduzir o nome oficial (o Yahoo retorna nomes associados)
@@ -101,7 +101,8 @@ Execute agora para '{self.empresa}' e retorne apenas o relatório formatado."""
 
     def generate_report(self):
         clear_term()
-        print("Gerando relatório... Por favor aguarde.")
+        print("🤖 Processando solicitação no modelo de IA...")
+        print("⏳ Isso pode levar alguns segundos.\n")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
