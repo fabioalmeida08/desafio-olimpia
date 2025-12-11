@@ -5,6 +5,7 @@ Google para criar agentes inteligentes.\
 Abaixo estão todas as instruções necessárias para configurar ambiente,
 instalar dependências e executar o projeto.
 
+![fluxo do projeto](./project_flow.png)
 ------------------------------------------------------------------------
 
 # 🔑 1. Obtendo sua API Key do Google Gemini
