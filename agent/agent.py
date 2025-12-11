@@ -28,7 +28,7 @@ class ResponseFormat:
 class FinanceAgent:
     def __init__(self, api_key: str, empresa: str):
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash-lite",
+            model="gemini-2.5-flash",
             temperature=0.2,
             google_api_key=api_key,
         )
