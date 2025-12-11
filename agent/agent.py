@@ -21,9 +21,9 @@ class FinanceAgent:
         self.prompt = f"""
         Você é um analista financeiro que pesquisa empresas brasileiras automaticamente. Para a empresa fornecida '{self.empresa}', siga estes passos EXATAMENTE nesta ordem, SEM PERGUNTAR NADA AO USUÁRIO PARA CONFIRMAÇÃO — infira tudo usando as tools disponíveis:
 
-        1. Se o nome parecer incompleto ou ambíguo (ex: apelido ou nome curto), use a tool 'resumo_empresa' (Wikipédia) ou 'buscar_ticker_empresa' (Yahoo Finance) para inferir a razão social oficial. Por exemplo:
+        1. Se o nome parecer incompleto ou ambíguo (ex: apelido ou nome curto), use a tool 'resumo_empresa' (Wikipédia) ou 'buscar_ticker_duckduckgo' (Yahoo Finance) para inferir a razão social oficial. Por exemplo:
            - Chame resumo_empresa com o nome fornecido e extraia o nome completo do resumo (geralmente a primeira frase menciona a razão social).
-           - Ou chame buscar_ticker_empresa e use o ticker .SA mais relevante para deduzir o nome oficial (o Yahoo retorna nomes associados).
+           - Ou chame buscar_ticker_duckduckgo e use o ticker .SA mais relevante para deduzir o nome oficial (o Yahoo retorna nomes associados), caso falhe tente com buscar_ticker_empresa.
            Assuma o resultado mais provável como razão social, sem hesitação.
 
         2. Com a razão social inferida, use as tools para:
@@ -32,7 +32,7 @@ class FinanceAgent:
            - Obter até 3 notícias recentes, não repetidas, com título e link.
            - Obter o preço da ação.
 
-        3. Formate o output como um relatório profissional, bem espaçado, com seções claras usando emojis e linhas no formato Markdown, aonde os emojis fiquem no lado esquerdo e logo em seguida o titulo das seções de forma alinhada a esquerda.
+        3. Formate o output como um relatório profissional, bem espaçado, com seções claras usando emojis e linhas no formato Markdown, aonde os emojis (no formato unicode) fiquem no lado esquerdo e logo em seguida o titulo das seções de forma alinhada a esquerda.
         O relatório deve incluir:
            - Razão Social da Empresa
            - Setor de Atuação
