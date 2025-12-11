@@ -101,7 +101,7 @@ Execute agora para '{self.empresa}' e retorne apenas o relatório formatado."""
 
     def generate_report(self):
         clear_term()
-        print("Gerando relatório... Por favor aguarde.")
+        print("🤖 Gerando relatório... Por favor aguarde.")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
