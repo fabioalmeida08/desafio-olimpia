@@ -68,7 +68,8 @@ Siga exatamente este procedimento:
 
     def generate_report(self):
         clear_term()
-        print("Interagindo com llm... Por favor aguarde.")
+        print("🤖 Processando solicitação no modelo de IA...")
+        print("⏳ Isso pode levar alguns segundos.\n")
         resposta = self.agent.invoke(
             {"messages": [{"role": "user", "content": self.prompt}]}
         )
